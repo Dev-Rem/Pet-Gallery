@@ -1,0 +1,50 @@
+// AppBar(
+          //   centerTitle: true,
+          //   elevation: 0.5,
+          //   shadowColor: Color.fromARGB(255, 255, 255, 255),
+          //   surfaceTintColor: Color.fromARGB(255, 255, 255, 255),
+          //   title: FittedBox(
+          //     fit: BoxFit.fitWidth,
+          //     child: Text(
+          //       'Pet Gallery',
+          //       style: TextStyle(
+          //           fontFamily: "Sacramento",
+          //           fontSize: 30,
+          //           fontWeight: FontWeight.w500),
+          //     ),
+          //   ),
+          // ),
+
+          // Center(
+          //   child: _widgetOptions.elementAt(_selectedIndex),
+          // ),
+
+
+
+bottomNavigationBar: BottomNavigationBar(
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            iconSize: 25.0,
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.chat,
+                ),
+                label: '',
+              ),
+              BottomNavigationBarItem(icon: Icon(Icons.add_box), label: ""),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: '',
+              ),
+            ],
+            currentIndex: _selectedIndex,
+            selectedItemColor: Color.fromARGB(255, 121, 94, 56),
+            unselectedItemColor: Color.fromARGB(255, 217, 191, 166),
+            onTap: _onItemTapped,
+          ),
+        )
