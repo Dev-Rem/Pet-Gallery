@@ -1,148 +1,257 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
-
   @override
   State<SignupScreen> createState() => _SignupScreenState();
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  TextEditingController _petNameController = TextEditingController();
-  TextEditingController _ageController = TextEditingController();
-  TextEditingController _genderController = TextEditingController();
-  TextEditingController _animalController = TextEditingController();
-  TextEditingController _breedController = TextEditingController();
-  TextEditingController _homeAddressController = TextEditingController();
-  TextEditingController _bioController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
-
-  String _petName = '';
-  int _age = 0;
-  String _gender = '';
-  String _animal = '';
-  String _breed = '';
-  String _homeAddress = '';
-  String _bio = '';
-  String _password = '';
-  String _confirmPassword = '';
-
-  @override
-  void dispose() {
-    _petNameController.dispose();
-    _ageController.dispose();
-    _genderController.dispose();
-    _animalController.dispose();
-    _breedController.dispose();
-    _homeAddressController.dispose();
-    _bioController.dispose();
-    _passwordController.dispose();
-    _confirmPasswordController.dispose();
-    super.dispose();
-  }
-
+  bool isFirstFormFilled = false;
+  String _inputText = '';
   @override
   Widget build(BuildContext context) {
-    return Material(
-        child: Center(
-            child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        TextField(
-          controller: _petNameController,
-          decoration:
-              InputDecoration(labelText: "Name", border: OutlineInputBorder()),
-          onChanged: (value) {
-            setState(() {
-              _petName = value;
-            });
-          },
-        ),
-        TextField(
-          controller: _ageController,
-          decoration:
-              InputDecoration(labelText: "Age", border: OutlineInputBorder() ),
-          onChanged: (value) {
-            setState(() {
-              _age = value as int;
-            });
-          },
-        ),
-        TextField(
-          controller: _genderController,
-          decoration: InputDecoration(
-              labelText: "Gender", border: OutlineInputBorder()),
-          onChanged: (value) {
-            setState(() {
-              _gender = value;
-            });
-          },
-        ),
-        TextField(
-          controller: _animalController,
-          decoration: InputDecoration(
-              labelText: "Animal", border: OutlineInputBorder()),
-          onChanged: (value) {
-            setState(() {
-              _animal = value;
-            });
-          },
-        ),
-        TextField(
-          controller: _breedController,
-          decoration:
-              InputDecoration(labelText: "Breed", border: OutlineInputBorder()),
-          onChanged: (value) {
-            setState(() {
-              _breed = value;
-            });
-          },
-        ),
-        TextField(
-          controller: _homeAddressController,
-          decoration: InputDecoration(
-              labelText: "Home address", border: OutlineInputBorder()),
-          onChanged: (value) {
-            setState(() {
-              _homeAddress = value;
-            });
-          },
-        ),
-        TextField(
-          controller: _bioController,
-          decoration: InputDecoration(
-            labelText: "Bio",
-            border: OutlineInputBorder(),
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          backgroundColor: Color.fromARGB(255, 237, 229, 221),
+          title: Text("Sign up"),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              // Navigate back to the previous screen
+              GoRouter.of(context).go('/');
+            },
           ),
-          onChanged: (value) {
-            setState(() {
-              _bio = value;
-            });
-          },
         ),
-        TextField(
-          controller: _passwordController,
-          decoration: InputDecoration(
-              labelText: "Password", border: OutlineInputBorder()),
-          onChanged: (value) {
-            setState(() {
-              _password = value;
-            });
-          },
-        ),
-        TextField(
-          controller: _confirmPasswordController,
-          decoration: InputDecoration(
-              labelText: "Confirm password", border: OutlineInputBorder()),
-          onChanged: (value) {
-            setState(() {
-              _confirmPassword = value;
-            });
-          },
-        ),
-      ],
-    )));
+        body: Center(
+          child: GestureDetector(
+            onTap: () {
+              // FocusScope.of(context).unfocus() will hide the keyboard
+              FocusScope.of(context).unfocus();
+            },
+            child: Container(
+              padding: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 50.0),
+              color: Color.fromARGB(255, 237, 229, 221),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      height: 350.0,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            'Create Account!!',
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 121, 94, 55),
+                                fontFamily: "Sacramento",
+                                fontSize: 35,
+                                fontWeight: FontWeight.w800),
+                          ),
+                          if (!isFirstFormFilled)
+                            Text(
+                                "Please provide the requested information as it applies to your pet."),
+                          if (isFirstFormFilled)
+                            Text(
+                                "Password should contain uppercase, lowercase, special character, and digit."),
+                          if (!isFirstFormFilled)
+                            TextField(
+                              onChanged: (value) {
+                                setState(() {
+                                  _inputText = value;
+                                });
+                              },
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                labelText: 'Name',
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15)),
+                              ),
+                            ),
+                          if (isFirstFormFilled)
+                            TextField(
+                              obscureText: true,
+                              onChanged: (value) {
+                                setState(() {
+                                  _inputText = value;
+                                });
+                              },
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                labelText: 'Password',
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15)),
+                              ),
+                            ),
+                          if (isFirstFormFilled)
+                            TextField(
+                              obscureText: true,
+                              onChanged: (value) {
+                                setState(() {
+                                  _inputText = value;
+                                });
+                              },
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                labelText: 'Confirm Password',
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15)),
+                              ),
+                            ),
+                          if (!isFirstFormFilled)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: TextField(
+                                    onChanged: (value) {
+                                      setState(() {
+                                        // _inputText = value;
+                                      });
+                                    },
+                                    decoration: InputDecoration(
+                                      labelText: 'Age',
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                Expanded(
+                                  child: TextField(
+                                    onChanged: (value) {
+                                      setState(() {
+                                        // _inputText = value;
+                                      });
+                                    },
+                                    decoration: InputDecoration(
+                                      labelText: 'Gender',
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          if (!isFirstFormFilled)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: TextField(
+                                    onChanged: (value) {
+                                      setState(() {
+                                        // _inputText = value;
+                                      });
+                                    },
+                                    decoration: InputDecoration(
+                                      labelText: 'Animal',
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                Expanded(
+                                  child: TextField(
+                                    onChanged: (value) {
+                                      setState(() {
+                                        // _inputText = value;
+                                      });
+                                    },
+                                    decoration: InputDecoration(
+                                      labelText: 'Breed',
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                        ],
+                      ),
+                    ),
+                    if (!isFirstFormFilled)
+                      SizedBox(
+                        width: double.infinity,
+                        height: 55.0,
+                        child: FilledButton(
+                          onPressed: () {
+                            // GoRouter.of(context).go('/homeScreen');
+                            if (!isFirstFormFilled) {
+                              setState(() {
+                                isFirstFormFilled = true;
+                              });
+                            }
+                          },
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // Add some space between the icon and text
+                              Text(
+                                'Next',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              Icon(
+                                Icons.arrow_forward,
+                                size: 30.0,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    if (isFirstFormFilled)
+                      SizedBox(
+                        width: double.infinity,
+                        height: 55.0,
+                        child: FilledButton(
+                          onPressed: () {
+                            GoRouter.of(context).go('/homeScreen');
+                          },
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // Add some space between the icon and text
+                              Text(
+                                'Submit',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                  ]),
+            ),
+          ),
+        ));
   }
 }

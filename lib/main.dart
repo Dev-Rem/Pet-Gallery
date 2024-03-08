@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import "package:pet_gallery/signinScreen.dart";
 import "signupScreen.dart";
 import "landingScreen.dart";
 import "homeScreen.dart";
+
 
 // USE FIREBASE AUTHENTICATION
 
@@ -31,7 +33,7 @@ final _router = GoRouter(
     GoRoute(
       path: '/signinScreen',
       builder: (BuildContext context, GoRouterState state) {
-        return HomeScreen();
+        return SigninScreen();
       },
     ),
   ],

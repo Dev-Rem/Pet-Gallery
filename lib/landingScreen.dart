@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 
 class LandingScreen extends StatefulWidget {
   const LandingScreen({super.key});
@@ -22,27 +22,13 @@ class _LandingScreenState extends State<LandingScreen> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                  padding: EdgeInsets.all(20.0),
+                  padding: EdgeInsets.all(40.0),
                   height: 480,
-                  width: 300,
-                  constraints: BoxConstraints(
-                    maxHeight: 500.0,
-                    maxWidth: 450.0,
-                  ),
+                  width: 350,
                   margin: EdgeInsets.only(bottom: 30.0),
                   decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.3), // Shadow color
-                        spreadRadius: 5, // Spread radius
-                        blurRadius: 7, // Blur radius
-                        offset: Offset(0, 3), // Changes position of shadow
-                      ),
-                    ],
-
-                    color: Colors.black
-                        .withOpacity(0.85), // Transparent black color
-                    borderRadius: BorderRadius.circular(20.0),
+                    color: Colors.white, // Transparent black color
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: Center(
                     child: Column(
@@ -60,7 +46,7 @@ class _LandingScreenState extends State<LandingScreen> {
                             Text(
                               'Pet Gallery',
                               style: TextStyle(
-                                  color: Color.fromARGB(255, 237, 229, 221),
+                                  color: Color.fromARGB(255, 121, 94, 55),
                                   fontFamily: "Sacramento",
                                   fontSize: 45,
                                   fontWeight: FontWeight.w800),
@@ -70,65 +56,72 @@ class _LandingScreenState extends State<LandingScreen> {
                         Text(
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: Colors.white,
+                                color: Color.fromARGB(255, 121, 94, 55),
                                 fontWeight: FontWeight.w600),
                             "Share the love, one paw at a time."),
                         Text(
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: Colors.white,
+                                color: Color.fromARGB(255, 121, 94, 55),
                                 fontWeight: FontWeight.w600),
                             "Welcome to Pet Gallery – where every wag, purr, and chirp has its own story."),
-                        OverflowBar(
-                          alignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            SizedBox(
-                                width: 120.0,
+                        Container(
+                          height: 105.0,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                  width: double.infinity,
+                                  height: 45.0,
+                                  child: FilledButton.tonal(
+                                    child: const Text(
+                                      'Sign In',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    onPressed: () {
+                                      GoRouter.of(context).go('/signinScreen');
+                                    },
+                                    style: ButtonStyle(
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                10.0), // Adjust the radius as needed
+                                          ),
+                                        ),
+                                        backgroundColor:
+                                            MaterialStateColor.resolveWith(
+                                                (states) => Color.fromARGB(
+                                                    255, 237, 229, 221))),
+                                  )),
+                              SizedBox(
+                                width: double.infinity,
                                 height: 45.0,
-                                child: FilledButton.tonal(
-                                  child: const Text(
-                                    'Sign In',
+                                child: FilledButton(
+                                  child: Text(
+                                    'Sign Up',
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w700),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    GoRouter.of(context).go('/signupScreen');
+                                  },
                                   style: ButtonStyle(
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              10.0), // Adjust the radius as needed
-                                        ),
+                                    shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            10.0), // Adjust the radius as needed
                                       ),
-                                      backgroundColor:
-                                          MaterialStateColor.resolveWith(
-                                              (states) => Color.fromARGB(
-                                                  255, 237, 229, 221))),
-                                )),
-                            SizedBox(
-                              width: 120.0,
-                              height: 45.0,
-                              child: FilledButton(
-                                child: Text(
-                                  'Sign Up',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                onPressed: () {},
-                                style: ButtonStyle(
-                                  shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          10.0), // Adjust the radius as needed
                                     ),
                                   ),
                                 ),
-                              ),
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         )
                       ],
                     ),
