@@ -43,8 +43,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          body: Center(
-            child: _widgetOptions.elementAt(_selectedIndex),
+          body: Container(
+            color: Color.fromARGB(255, 237, 229, 221),
+            child: Center(
+              child: _widgetOptions.elementAt(_selectedIndex),
+            ),
           ),
           bottomNavigationBar: BottomNavigationBar(
             showSelectedLabels: false,
