@@ -9,7 +9,9 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   bool isFirstFormFilled = false;
-  String _inputText = '';
+  bool _showPassword = true;
+  bool _showConfirmPassword = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,11 +60,6 @@ class _SignupScreenState extends State<SignupScreen> {
                                 "Password should contain uppercase, lowercase, special character, and digit."),
                           if (!isFirstFormFilled)
                             TextField(
-                              onChanged: (value) {
-                                setState(() {
-                                  _inputText = value;
-                                });
-                              },
                               decoration: InputDecoration(
                                 fillColor: Colors.white,
                                 labelText: 'Name',
@@ -72,14 +69,26 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                           if (isFirstFormFilled)
                             TextField(
-                              obscureText: true,
+                              obscureText: _showPassword,
                               onChanged: (value) {
                                 setState(() {
-                                  _inputText = value;
+                                  // _inputText = value;
                                 });
                               },
                               decoration: InputDecoration(
-                                fillColor: Colors.white,
+                                suffixIcon: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _showPassword = !_showPassword;
+                                    });
+                                  },
+                                  child: Icon(
+                                    (_showPassword
+                                        ? Icons.visibility
+                                        : Icons.visibility_off),
+                                    color: Color.fromARGB(255, 121, 94, 55),
+                                  ),
+                                ),
                                 labelText: 'Password',
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15)),
@@ -87,15 +96,28 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                           if (isFirstFormFilled)
                             TextField(
-                              obscureText: true,
+                              obscureText: _showConfirmPassword,
                               onChanged: (value) {
                                 setState(() {
-                                  _inputText = value;
+                                  // _inputText = value;
                                 });
                               },
                               decoration: InputDecoration(
-                                fillColor: Colors.white,
-                                labelText: 'Confirm Password',
+                                suffixIcon: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _showConfirmPassword =
+                                          !_showConfirmPassword;
+                                    });
+                                  },
+                                  child: Icon(
+                                    (_showConfirmPassword
+                                        ? Icons.visibility
+                                        : Icons.visibility_off),
+                                    color: Color.fromARGB(255, 121, 94, 55),
+                                  ),
+                                ),
+                                labelText: 'Confirm password',
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15)),
                               ),

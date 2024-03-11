@@ -9,6 +9,14 @@ class SigninScreen extends StatefulWidget {
 
 class _SigninScreenState extends State<SigninScreen> {
   String _inputText = '';
+  bool _showPassword = true;
+
+  void _setShowPassword() {
+    setState(() {
+      _showPassword = !_showPassword;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,12 +71,24 @@ class _SigninScreenState extends State<SigninScreen> {
                             ),
                           ),
                           TextField(
+                            obscureText: _showPassword,
                             onChanged: (value) {
                               setState(() {
                                 // _inputText = value;
                               });
                             },
                             decoration: InputDecoration(
+                              suffixIcon: GestureDetector(
+                                onTap: () {
+                                  _setShowPassword();
+                                },
+                                child: Icon(
+                                  (_showPassword
+                                      ? Icons.visibility
+                                      : Icons.visibility_off),
+                                  color: Color.fromARGB(255, 121, 94, 55),
+                                ),
+                              ),
                               labelText: 'Pets password',
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15)),
