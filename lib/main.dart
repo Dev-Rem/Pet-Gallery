@@ -5,7 +5,6 @@ import "signupScreen.dart";
 import "landingScreen.dart";
 import "homeScreen.dart";
 
-
 // USE FIREBASE AUTHENTICATION
 
 void main() {
@@ -16,24 +15,26 @@ final _router = GoRouter(
   routes: <RouteBase>[
     GoRoute(
         path: '/',
+        routes: [
+          GoRoute(
+              path: 'signupScreen',
+              builder: (BuildContext context, GoRouterState state) {
+                return const SignupScreen();
+              }),
+          GoRoute(
+            path: 'signinScreen',
+            builder: (BuildContext context, GoRouterState state) {
+              return SigninScreen();
+            },
+          ),
+        ],
         builder: (BuildContext context, GoRouterState state) {
           return const LandingScreen();
-        }),
-    GoRoute(
-        path: '/signupScreen',
-        builder: (BuildContext context, GoRouterState state) {
-          return const SignupScreen();
         }),
     GoRoute(
       path: '/homeScreen',
       builder: (BuildContext context, GoRouterState state) {
         return HomeScreen();
-      },
-    ),
-    GoRoute(
-      path: '/signinScreen',
-      builder: (BuildContext context, GoRouterState state) {
-        return SigninScreen();
       },
     ),
   ],
