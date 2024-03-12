@@ -85,6 +85,9 @@ flutter:
     - assets/image_4.png
     - assets/pet_gallery_logo.png
     - assets/pet_gallery_logo_circle.png
+    - assets/logo_loading.gif
+    - assets/images.png
+    
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

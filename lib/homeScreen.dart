@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_gallery/homePage.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -9,7 +10,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    Text('Home Page'),
+    HomePage(),
     Text('Search Page'),
     Text('New Post Page'),
     Text('Chat Page'),
@@ -45,9 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           body: Container(
             color: Color.fromARGB(255, 237, 229, 221),
-            child: Center(
-              child: _widgetOptions.elementAt(_selectedIndex),
-            ),
+            child: _widgetOptions.elementAt(_selectedIndex),
           ),
           bottomNavigationBar: BottomNavigationBar(
             showSelectedLabels: false,
@@ -73,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               BottomNavigationBarItem(
                   activeIcon: Icon(Icons.chat),
-                  icon: Icon(Icons.chat_outlined),
+                  icon: Icon(Icons.chat),
                   label: ""),
               BottomNavigationBarItem(
                 activeIcon: Icon(Icons.pets),
